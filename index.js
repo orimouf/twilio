@@ -47,7 +47,7 @@ app.post('/sendWhatsapp', function (req, res) {
         from: 'whatsapp:+14155238886',
         contentSid: process.env.CONTENT_SID,
         contentVariables: '{"1":"'+ req.body.url +'"}',
-        to: 'whatsapp:+213559670962'
+        to: 'whatsapp:+213791602498'
     })
     .then(res.send('message sended.'));
 	//'{"1":"https://www.hermes.com/fr/fr/product/sac-hermes-in-the-loop-18-H085690CKAM/"}'
