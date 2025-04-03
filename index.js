@@ -37,8 +37,7 @@ app.post('/sendWhatsapp', function (req, res) {
 	// whatsapp message
     res.header("Access-Control-Allow-Origin", "https://www.hermes.com"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-    
+        
     const accountSid = process.env.ACCOUNT_SID;
     const authToken = process.env.AUTH_TOKEN;
     const client = require('twilio')(accountSid, authToken);    
