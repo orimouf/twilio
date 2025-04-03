@@ -23,6 +23,11 @@ app.set('port', (process.env.PORT || 8000));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // Home
 app.get('/', function (req, res) {
@@ -33,11 +38,8 @@ app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'));
 });
 
-app.post('/sendWhatsapp', function (req, res, next) {
+app.post('/sendWhatsapp', function (req, res) {
 	// whatsapp message
-    res.header("Access-Control-Allow-Origin", "https://www.hermes.com"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
         
     const accountSid = process.env.ACCOUNT_SID;
     const authToken = process.env.AUTH_TOKEN;
