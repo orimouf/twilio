@@ -36,14 +36,14 @@ app.listen(app.get('port'), function() {
 app.post('/sendWhatsapp', function (req, res) {
 	// whatsapp message
     
-    const accountSid = 'ACb7659ed584463f0a81efa95427c30fab';
-    const authToken = 'a0f6864fe4923515361affcdd5280258';
+    const accountSid = process.env.ACCOUNT_SID;
+    const authToken = process.env.AUTH_TOKEN;
     const client = require('twilio')(accountSid, authToken);    
 
     client.messages
     .create({
         from: 'whatsapp:+14155238886',
-        contentSid: 'HX229f5a04fd0510ce1b071852155d3e75',
+        contentSid: process.env.CONTENT_SID,
         contentVariables: '{"1":"'+ req.body.url +'"}',
         to: 'whatsapp:+213559670962'
     })
