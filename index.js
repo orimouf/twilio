@@ -33,10 +33,11 @@ app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'));
 });
 
-app.post('/sendWhatsapp', function (req, res) {
+app.post('/sendWhatsapp', function (req, res, next) {
 	// whatsapp message
-    // res.header("Access-Control-Allow-Origin", "https://www.hermes.com"); // update to match the domain you will make the request from
-    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Origin", "https://www.hermes.com"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
         
     const accountSid = process.env.ACCOUNT_SID;
     const authToken = process.env.AUTH_TOKEN;
@@ -49,11 +50,7 @@ app.post('/sendWhatsapp', function (req, res) {
         contentVariables: '{"1":"'+ req.body.url +'"}',
         to: 'whatsapp:+213791602498'
     })
-    .then(
-        res.header("Access-Control-Allow-Origin", "https://www.hermes.com/*"), // update to match the domain you will make the request from
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"),
-        res.send('message sended.')
-    );
+    .then(res.send('message sended.'));
 	//'{"1":"https://www.hermes.com/fr/fr/product/sac-hermes-in-the-loop-18-H085690CKAM/"}'
 });
 
